@@ -3,29 +3,40 @@
     <head>
         <meta charset="utf-8">
         <title>Student App</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-        <script src="studentApp.js"></script>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="style.css">
+            
+        <script src="studentApp.js"></script>
     </head>
     
     <body id="all">
         <div ng-app="studentApp" ng-controller="studentCtrl">
             <form class="pure-form">
                 <br>
+                <span>Add Student:</span>
                 <!--First Name: --><input type="text" ng-model="firstName" placeholder="First Name">
                 <!--Last Name: --><input type="text" ng-model="lastName" placeholder="Last Name">
                 
-                <button ng-click="submit()" class="pure-button pure-button-primary">Submit</button>
-            </form>
+                <button ng-click="submit('add')" class="pure-button pure-button-primary">Submit</button>
             
-            <table>
-                <tr ng-repeat="student in studentList">
-                    <td>{{student.firstName}}</td>
-                    <td>{{student.lastName}}</td>
+            
+            <div id="errorDiv"></div>
+            
+            <br>
+            <table border=1>
+                <tr id="student.id" ng-repeat="student in studentList">
+                    <td><input type="text" ng-model="student.firstName" ng-blur="edit('edit', student)"></td>
+                    <td><input type="text" ng-model="student.lastName" ng-blur="edit('edit', student)"></td>
+                    <td><button ng-click="submit('delete', student.id)" class="pure-button">Delete</button></td>
                 </tr>
             </table>
+            
+            </form>
         </div>
+        
+        
     </body>
 
 </html>
